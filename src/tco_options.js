@@ -52,8 +52,16 @@ class Form extends React.Component {
           />
         </div>
 
-        {this.props.fwChecked ? <FwForm /> : null}
-        {this.props.lbChecked ? <LbForm /> : null}
+        {this.props.fwChecked ?
+          <FwForm
+            updatefwSlider={this.props.updatefwSlider}
+          />
+          : null}
+        {this.props.lbChecked ?
+          <LbForm
+            updatelbSlider={this.props.updatelbSlider}
+          />
+          : null}
 
       </div>
     );

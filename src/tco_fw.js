@@ -9,19 +9,8 @@ import './tco.css';
 
 const min = 0;
 const max = 8;
-const values = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000]
 
 class Firewall extends React.Component {
-
-  state = {
-    fwSlider: 0,
-    fwIndex: 0,
-  };
-
-  handleSlider = (event, index) => {
-    this.setState({fwIndex: fwIndex});
-    this.setState({fwSlider: values[fwIndex]});
-  };
 
   render() {
 
@@ -77,15 +66,15 @@ class Firewall extends React.Component {
 
           <p>
             <span>{"Desired Average Throughput per Tenant (in Mb/s): "}</span>
-            <span>{this.state.slider}</span>
+            <span>{this.props.fwSlider}</span>
           </p>
           <Slider
             name = "fw_average"
             min = {min}
             max = {max}
             step = {1}
-            value = {this.state.slider}
-            onChange = {this.handleSlider}
+            value = {this.props.fwIndex}
+            onChange = {this.props.updatefwSlider}
           />
 
         </div>

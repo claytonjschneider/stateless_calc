@@ -9,19 +9,8 @@ import './tco.css';
 
 const min = 0;
 const max = 8;
-const values = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000]
 
 class LoadBalancer extends React.Component {
-
-  state = {
-    slider: 0,
-    index: 0,
-  };
-
-  handleSlider = (event, index) => {
-    this.setState({index: index});
-    this.setState({slider: values[index]});
-  };
 
   render() {
 
@@ -78,15 +67,15 @@ class LoadBalancer extends React.Component {
 
           <p>
             <span>{"Desired Average Throughput per Tenant (in Mb/s): "}</span>
-            <span>{this.state.slider}</span>
+            <span>{this.props.lbSlider}</span>
           </p>
           <Slider
             name = "lb_average"
             min = {min}
             max = {max}
             step = {1}
-            value = {this.state.slider}
-            onChange = {this.handleSlider}
+            value = {this.props.lbSlider}
+            onChange = {this.props.updatelbSlider}
           />
 
         </div>

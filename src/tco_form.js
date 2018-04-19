@@ -24,6 +24,8 @@ var results = [
   {name: 'Top-Layer Software', value: 0},
 ]
 
+const sliderValues = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000]
+
 class Form extends React.Component {
 
   constructor(props) {
@@ -40,9 +42,14 @@ class Form extends React.Component {
       lb_tenants: 0,
       lb_machines: 0,
       lb_average: 0,
+      fwSlider: 0,
+      fwIndex: 0,
+      lbSlider: 0,
+      lbIndex: 0,
     }
   }
 
+  /* Update to Show Form or Results */
   updateResults() {
     this.setState((oldState) => {
       return {
@@ -51,6 +58,7 @@ class Form extends React.Component {
     });
   }
 
+  /* Update to Show User's Choice of NF's */
   updatefwCheck() {
     this.setState((oldState) => {
       return {
@@ -65,6 +73,18 @@ class Form extends React.Component {
       }
     })
   }
+
+  /* Handle Sliders on Firewall Form */
+  handlefwSlider = (event, fwIndex) => {
+    this.setState({fwIndex: fwIndex});
+    this.setState({fwSlider: sliderValues[fwIndex]});
+  };
+
+  /* Handle Sliders on Load Bal Form */
+  handlelbSlider = (event, index) => {
+    this.setState({lbIndex: index});
+    this.setState({lbSlider: sliderValues[index]});
+  };
 
   render() {
     console.log(this.state);
@@ -84,10 +104,32 @@ class Form extends React.Component {
 
         {this.state.showForm ?
           <div>
-            <OpsForm fwCheckboxUpdate={this.updatefwCheck.bind(this)} lbCheckboxUpdate={this.updatelbCheck.bind(this)} fwChecked={this.state.fwChecked} lbChecked={this.state.lbChecked} />
+            <OpsForm
+              fwCheckboxUpdate={this.updatefwCheck.bind(this)}
+              updatefwSlider={this.handlefwSlider.bind(this)}
+              fwChecked={this.state.fwChecked}
+              fw_bandwidth={this.state.fw_bandwidth}
+              fw_tenants={this.state.fw_tenants}
+              fw_machines={this.state.fw_machines}
+              fw_average={this.state.fw_average}
+              fwSlider={this.state.fwSlider}
+              fwIndex={this.state.fwIndex}
+              lbCheckboxUpdate={this.updatelbCheck.bind(this)}
+              updatelbSlider={this.handlelbSlider.bind(this)}
+              lbChecked={this.state.lbChecked}
+              lb_bandwidth={this.state.lb_bandwidth}
+              lb_tenants={this.state.lb_tenants}
+              lb_machines={this.state.lb_machines}
+              lb_average={this.state.lb_average}
+              lbSlider={this.state.lbSlider}
+              lbIndex={this.state.lbIndex}
+            />
 
             <div className="buttonDiv">
-              <Button label="Results" onClick={this.updateResults.bind(this)} />
+              <Button
+                label="Results"
+                onClick={this.updateResults.bind(this)}
+              />
             </div>
 
           </div>
@@ -105,7 +147,10 @@ class Form extends React.Component {
             />
 
             <div className="buttonDiv">
-              <Button label="Go back" onClick={this.updateResults.bind(this)} />
+              <Button
+                label="Go back"
+                onClick={this.updateResults.bind(this)}
+              />
             </div>
           </div>
         }
