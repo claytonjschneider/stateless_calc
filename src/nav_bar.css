@@ -1,0 +1,11 @@
+.navBar {
+  background-color: #2C2C2C;
+  height: 50px;
+  color: white;
+}
+
+.navBar_Logo {
+  height: 40px;
+  align-self: center;
+  padding-top: 5px;
+}

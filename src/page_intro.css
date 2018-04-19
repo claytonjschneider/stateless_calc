@@ -1,0 +1,10 @@
+.intro h2{
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.intro p{
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}

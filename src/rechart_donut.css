@@ -1,0 +1,22 @@
+.chartBox {
+  position: relative;
+}
+
+.savingsClass {
+  position: absolute;
+  z-index: 2;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  align-self: center;
+  top: 118px;
+  color: #7E7E7E;
+  font-family: 'Roboto', sans-serif;
+  font-size: 32px;
+}
+
+.ResponsiveContainer {
+  z-index: 1;
+  top: 0;
+  left: 0;
+}
