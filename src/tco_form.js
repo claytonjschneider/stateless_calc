@@ -106,8 +106,8 @@ class Form extends React.Component {
           <div>
             <OpsForm
               fwCheckboxUpdate={this.updatefwCheck.bind(this)}
-              updatefwSlider={this.handlefwSlider.bind(this)}
               fwChecked={this.state.fwChecked}
+              updatefwSlider={this.handlefwSlider.bind(this)}
               fw_bandwidth={this.state.fw_bandwidth}
               fw_tenants={this.state.fw_tenants}
               fw_machines={this.state.fw_machines}
@@ -115,8 +115,8 @@ class Form extends React.Component {
               fwSlider={this.state.fwSlider}
               fwIndex={this.state.fwIndex}
               lbCheckboxUpdate={this.updatelbCheck.bind(this)}
-              updatelbSlider={this.handlelbSlider.bind(this)}
               lbChecked={this.state.lbChecked}
+              updatelbSlider={this.handlelbSlider.bind(this)}
               lb_bandwidth={this.state.lb_bandwidth}
               lb_tenants={this.state.lb_tenants}
               lb_machines={this.state.lb_machines}

@@ -54,12 +54,24 @@ class Form extends React.Component {
 
         {this.props.fwChecked ?
           <FwForm
-            updatefwSlider={this.props.updatefwSlider}
+            updatefwSlider={this.props.updatefwSlider.bind(this)}
+            fw_bandwidth={this.props.fw_bandwidth}
+            fw_tenants={this.props.fw_tenants}
+            fw_machines={this.props.fw_machines}
+            fw_average={this.props.fw_average}
+            fwSlider={this.props.fwSlider}
+            fwIndex={this.props.fwIndex}
           />
           : null}
         {this.props.lbChecked ?
           <LbForm
-            updatelbSlider={this.props.updatelbSlider}
+            updatelbSlider={this.props.updatelbSlider.bind(this)}
+            lb_bandwidth={this.props.lb_bandwidth}
+            lb_tenants={this.props.lb_tenants}
+            lb_machines={this.props.lb_machines}
+            lb_average={this.props.lb_average}
+            lbSlider={this.props.lbSlider}
+            lbIndex={this.props.lbIndex}
           />
           : null}
 
