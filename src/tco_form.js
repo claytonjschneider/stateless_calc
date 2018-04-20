@@ -34,6 +34,8 @@ class Form extends React.Component {
       showForm: true,
       fwChecked: false,
       lbChecked: false,
+      fwSlider: 0,
+      fwIndex: 0,
       fw_bandwidth: 0,
       fw_tenants: 0,
       fw_machines: 0,
@@ -42,8 +44,6 @@ class Form extends React.Component {
       lb_tenants: 0,
       lb_machines: 0,
       lb_average: 0,
-      fwSlider: 0,
-      fwIndex: 0,
       lbSlider: 0,
       lbIndex: 0,
     }
@@ -70,8 +70,35 @@ class Form extends React.Component {
     this.setState((oldState)  => {
       return {
         lbChecked: !oldState.lbChecked,
-      }
-    })
+      };
+    });
+  }
+
+  /* Text Field on Firewall - Bandwidth */
+  updatefwBandwidth (event, value) {
+    this.setState((fw_bandwidth) => {
+      return {
+        fw_bandwidth: value,
+      };
+    });
+  }
+
+  /* Text Field on Firewall - Tenants */
+  updatefwTenants (event, value) {
+    this.setState((fw_tenants) => {
+      return {
+        fw_tenants: value,
+      };
+    });
+  }
+
+  /* Text Field on Firewall - Machines */
+  updatefwMachines (event, value) {
+    this.setState((fw_machines) => {
+      return {
+        fw_machines: value,
+      };
+    });
   }
 
   /* Handle Sliders on Firewall Form */
@@ -80,10 +107,59 @@ class Form extends React.Component {
     this.setState({fwSlider: sliderValues[fwIndex]});
   };
 
+  /* Text Field on Load Balancer - Bandwidth */
+  updatelbBandwidth (event, value) {
+    this.setState((lb_bandwidth) => {
+      return {
+        lb_bandwidth: value,
+      };
+    });
+  }
+
+  /* Text Field on Load Balancer - Tenants */
+  updatelbTenants (event, value) {
+    this.setState((lb_tenants) => {
+      return {
+        lb_tenants: value,
+      };
+    });
+  }
+
+  /* Text Field on Load Balancer - Machines */
+  updatelbMachines (event, value) {
+    this.setState((lb_machines) => {
+      return {
+        lb_machines: value,
+      };
+    });
+  }
+
   /* Handle Sliders on Load Bal Form */
-  handlelbSlider = (event, index) => {
-    this.setState({lbIndex: index});
-    this.setState({lbSlider: sliderValues[index]});
+  handlelbSlider = (event, lbIndex) => {
+    this.setState({lbIndex: lbIndex});
+    this.setState({lbSlider: sliderValues[lbIndex]});
+  };
+
+  /* Update Results Array */
+  updateResults() {
+    /* Hardware Appliances */
+    results[1].value = {
+      (this.state.fw_bandwidth/48)*(((0.6*this.state.t1_fw)/0.1)+((0.2*this.state.t2_fw)/1)+((0.1*this.state.t3_fw)/2)+((0.1*this.state.t4_fw)/4))
+    }
+    /* Backups/Redundancy */
+    results[2].value = {results[1].value}
+    /* Power and Cooling */
+    results[3].value = {
+      (43200)*(0.1)
+    }
+    /* Support Tickets */
+    results[4].value = {921}
+    /* Licensing */
+    results[5].value = {421}
+    /* Network Downtime */
+    results[6].value = {14000}
+    /* Top-Layer Software */
+    results[7].value = {0}
   };
 
   render() {
@@ -105,21 +181,29 @@ class Form extends React.Component {
         {this.state.showForm ?
           <div>
             <OpsForm
+              /* Firewall Props */
               fwCheckboxUpdate={this.updatefwCheck.bind(this)}
               fwChecked={this.state.fwChecked}
               updatefwSlider={this.handlefwSlider.bind(this)}
               fw_bandwidth={this.state.fw_bandwidth}
+              updatefwBandwidth={this.updatefwBandwidth.bind(this)}
               fw_tenants={this.state.fw_tenants}
+              updatefwTenants={this.updatefwTenants.bind(this)}
               fw_machines={this.state.fw_machines}
+              updatefwMachines={this.updatefwMachines.bind(this)}
               fw_average={this.state.fw_average}
               fwSlider={this.state.fwSlider}
               fwIndex={this.state.fwIndex}
+              /* Load Balancer Props */
               lbCheckboxUpdate={this.updatelbCheck.bind(this)}
               lbChecked={this.state.lbChecked}
               updatelbSlider={this.handlelbSlider.bind(this)}
               lb_bandwidth={this.state.lb_bandwidth}
+              updatelbBandwidth={this.updatelbBandwidth.bind(this)}
               lb_tenants={this.state.lb_tenants}
+              updatelbTenants={this.updatelbTenants.bind(this)}
               lb_machines={this.state.lb_machines}
+              updatelbMachines={this.updatelbMachines.bind(this)}
               lb_average={this.state.lb_average}
               lbSlider={this.state.lbSlider}
               lbIndex={this.state.lbIndex}
@@ -134,13 +218,12 @@ class Form extends React.Component {
 
           </div>
           :
+          updateResults();
           <div>
             <PageIntro
               introText="Your estimated monthly savings"
               introSubText=""
             />
-
-            { /* logic component goes here */ }
 
             <DonutChart
               info={results}

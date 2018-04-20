@@ -43,6 +43,8 @@ class Firewall extends React.Component {
             type="number"
             floatingLabelText="Total Firewall Bandwidth Needed per Month (in Gb)"
             hintText="0"
+            onChange={this.props.updatefwBandwidth}
+            value={this.props.fw_bandwidth}
             // errorText="This field is required"
           /><br />
 
@@ -52,6 +54,8 @@ class Firewall extends React.Component {
             type="number"
             floatingLabelText="Number of Tenants Sharing Firewall"
             hintText="0"
+            value={this.props.fw_tenants}
+            onChange={this.props.updatefwTenants}
             // errorText="This field is required"
           /><br />
 
@@ -61,6 +65,8 @@ class Firewall extends React.Component {
             type="number"
             floatingLabelText="Total Number of Firewall Machines in Use"
             hintText="0"
+            onChange={this.props.updatefwMachines}
+            value={this.props.fw_machines}
             // errorText="This field is required"
           /><br />
 

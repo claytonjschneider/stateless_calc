@@ -55,8 +55,11 @@ class Form extends React.Component {
         {this.props.fwChecked ?
           <FwForm
             updatefwSlider={this.props.updatefwSlider.bind(this)}
+            updatefwBandwidth={this.props.updatefwBandwidth.bind(this)}
             fw_bandwidth={this.props.fw_bandwidth}
+            updatefwTenants={this.props.updatefwTenants.bind(this)}
             fw_tenants={this.props.fw_tenants}
+            updatefwMachines={this.props.updatefwMachines.bind(this)}
             fw_machines={this.props.fw_machines}
             fw_average={this.props.fw_average}
             fwSlider={this.props.fwSlider}
@@ -66,8 +69,11 @@ class Form extends React.Component {
         {this.props.lbChecked ?
           <LbForm
             updatelbSlider={this.props.updatelbSlider.bind(this)}
+            updatelbBandwidth={this.props.updatelbBandwidth.bind(this)}
             lb_bandwidth={this.props.lb_bandwidth}
+            updatelbTenants={this.props.updatelbTenants.bind(this)}
             lb_tenants={this.props.lb_tenants}
+            updatelbMachines={this.props.updatelbMachines.bind(this)}
             lb_machines={this.props.lb_machines}
             lb_average={this.props.lb_average}
             lbSlider={this.props.lbSlider}
