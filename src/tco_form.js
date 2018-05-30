@@ -9,6 +9,7 @@ import Button from 'material-ui/RaisedButton';
 import PageIntro from './page_intro.js';
 import HeaderImg from './img/backgrounds/976b04_0f54ebf6146142e2b012a362b98d3ea8-mv2_d_7319_3910_s_4_2.jpg';
 
+import BeginPage from './tco_begin.js';
 import DonutChart from './rechart_donut.js';
 import OpsForm from './tco_options.js';
 
@@ -31,6 +32,7 @@ class Form extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      beginForm: true,
       showForm: true,
       fwChecked: false,
       lbChecked: false,
@@ -46,7 +48,17 @@ class Form extends React.Component {
       lb_average: 0,
       lbSlider: 0,
       lbIndex: 0,
+      usrInfo: {name: '', email: '', company: ''},
     }
+  }
+
+  /* Update to Move from Begin Page */
+  updateBeginForm() {
+    this.setState((oldState) => {
+      return {
+        beginForm: !oldState.beginForm,
+      }
+    });
   }
 
   /* Update to Show Form or Results */
@@ -140,27 +152,111 @@ class Form extends React.Component {
     this.setState({lbSlider: sliderValues[lbIndex]});
   };
 
-  /* Update Results Array */
-  updateResults() {
-    /* Hardware Appliances */
-    results[1].value = {
-      (this.state.fw_bandwidth/48)*(((0.6*this.state.t1_fw)/0.1)+((0.2*this.state.t2_fw)/1)+((0.1*this.state.t3_fw)/2)+((0.1*this.state.t4_fw)/4))
+  // /* DO NOT USE AS OF 3.27.18 */
+  // /* Update Results Array */
+  // updateResults() {
+  //   /* Hardware Appliances */
+  //   results[1].value = {
+  //     (this.state.fw_bandwidth/48)*(((0.6*this.state.t1_fw)/0.1)+((0.2*this.state.t2_fw)/1)+((0.1*this.state.t3_fw)/2)+((0.1*this.state.t4_fw)/4))
+  //   }
+  //   /* Backups/Redundancy */
+  //   results[2].value = {results[1].value}
+  //   /* Power and Cooling */
+  //   results[3].value = {
+  //     (43200)*(0.1)
+  //   }
+  //   /* Support Tickets */
+  //   results[4].value = {921}
+  //   /* Licensing */
+  //   results[5].value = {421}
+  //   /* Network Downtime */
+  //   results[6].value = {14000}
+  //   /* Top-Layer Software */
+  //   results[7].value = {0}
+  // };
+
+  showBeginPage() {
+    if (this.state.beginForm) {
+      return (
+        <BeginPage
+          beginForm={this.state.beginForm}
+          updateBeginForm={this.updateBeginForm.bind(this)}
+        />
+      )
     }
-    /* Backups/Redundancy */
-    results[2].value = {results[1].value}
-    /* Power and Cooling */
-    results[3].value = {
-      (43200)*(0.1)
+    else {
+      return (null)
     }
-    /* Support Tickets */
-    results[4].value = {921}
-    /* Licensing */
-    results[5].value = {421}
-    /* Network Downtime */
-    results[6].value = {14000}
-    /* Top-Layer Software */
-    results[7].value = {0}
-  };
+  }
+
+  showFormAndResultsPage() {
+    if (!this.state.beginForm && this.state.showForm) {
+      return (
+        <div>
+          <OpsForm
+            /* Firewall Props */
+            fwCheckboxUpdate={this.updatefwCheck.bind(this)}
+            fwChecked={this.state.fwChecked}
+            updatefwSlider={this.handlefwSlider.bind(this)}
+            fw_bandwidth={this.state.fw_bandwidth}
+            updatefwBandwidth={this.updatefwBandwidth.bind(this)}
+            fw_tenants={this.state.fw_tenants}
+            updatefwTenants={this.updatefwTenants.bind(this)}
+            fw_machines={this.state.fw_machines}
+            updatefwMachines={this.updatefwMachines.bind(this)}
+            fw_average={this.state.fw_average}
+            fwSlider={this.state.fwSlider}
+            fwIndex={this.state.fwIndex}
+            /* Load Balancer Props */
+            lbCheckboxUpdate={this.updatelbCheck.bind(this)}
+            lbChecked={this.state.lbChecked}
+            updatelbSlider={this.handlelbSlider.bind(this)}
+            lb_bandwidth={this.state.lb_bandwidth}
+            updatelbBandwidth={this.updatelbBandwidth.bind(this)}
+            lb_tenants={this.state.lb_tenants}
+            updatelbTenants={this.updatelbTenants.bind(this)}
+            lb_machines={this.state.lb_machines}
+            updatelbMachines={this.updatelbMachines.bind(this)}
+            lb_average={this.state.lb_average}
+            lbSlider={this.state.lbSlider}
+            lbIndex={this.state.lbIndex}
+          />
+
+          <div className="buttonDiv">
+            <Button
+              label="Results"
+              onClick={this.updateResults.bind(this)}
+            />
+          </div>
+        </div>
+      )
+    }
+    else if (!this.state.beginForm && !this.state.showForm) {
+      return (
+        /* updateResults(); */
+        <div>
+          <PageIntro
+            introText="Your estimated monthly savings"
+            introSubText=""
+          />
+
+          <DonutChart
+            info={results}
+          />
+
+          <div className="buttonDiv">
+            <Button
+              label="Go back"
+              onClick={this.updateResults.bind(this)}
+            />
+          </div>
+        </div>
+      )
+    }
+    else {
+      return (null)
+    }
+  }
 
   render() {
     console.log(this.state);
@@ -175,73 +271,13 @@ class Form extends React.Component {
 
         <PageBanner
           img={HeaderImg}
-          bannerText="Stateless TCO Calculator"
+          bannerText="TCO Calculator"
         />
 
-        {this.state.showForm ?
-          <div>
-            <OpsForm
-              /* Firewall Props */
-              fwCheckboxUpdate={this.updatefwCheck.bind(this)}
-              fwChecked={this.state.fwChecked}
-              updatefwSlider={this.handlefwSlider.bind(this)}
-              fw_bandwidth={this.state.fw_bandwidth}
-              updatefwBandwidth={this.updatefwBandwidth.bind(this)}
-              fw_tenants={this.state.fw_tenants}
-              updatefwTenants={this.updatefwTenants.bind(this)}
-              fw_machines={this.state.fw_machines}
-              updatefwMachines={this.updatefwMachines.bind(this)}
-              fw_average={this.state.fw_average}
-              fwSlider={this.state.fwSlider}
-              fwIndex={this.state.fwIndex}
-              /* Load Balancer Props */
-              lbCheckboxUpdate={this.updatelbCheck.bind(this)}
-              lbChecked={this.state.lbChecked}
-              updatelbSlider={this.handlelbSlider.bind(this)}
-              lb_bandwidth={this.state.lb_bandwidth}
-              updatelbBandwidth={this.updatelbBandwidth.bind(this)}
-              lb_tenants={this.state.lb_tenants}
-              updatelbTenants={this.updatelbTenants.bind(this)}
-              lb_machines={this.state.lb_machines}
-              updatelbMachines={this.updatelbMachines.bind(this)}
-              lb_average={this.state.lb_average}
-              lbSlider={this.state.lbSlider}
-              lbIndex={this.state.lbIndex}
-            />
-
-            <div className="buttonDiv">
-              <Button
-                label="Results"
-                onClick={this.updateResults.bind(this)}
-              />
-            </div>
-
-          </div>
-          :
-          updateResults();
-          <div>
-            <PageIntro
-              introText="Your estimated monthly savings"
-              introSubText=""
-            />
-
-            <DonutChart
-              info={results}
-            />
-
-            <div className="buttonDiv">
-              <Button
-                label="Go back"
-                onClick={this.updateResults.bind(this)}
-              />
-            </div>
-          </div>
-        }
-
+        {this.showBeginPage()}
+        {this.showFormAndResultsPage()}
       </div>
-
       </MuiThemeProvider>
-
     );
   }
 }

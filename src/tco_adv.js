@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom';
 
 import PageIntro from './page_intro.js';
 import Button from 'material-ui/RaisedButton';
-import RoundImage from './image_round.js';
 
-import HeaderImg from './img/backgrounds/976b04_0f54ebf6146142e2b012a362b98d3ea8-mv2_d_7319_3910_s_4_2.jpg';
-import TCOBg from './img/backgrounds/pexels-photo-356074_edited.jpg';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './tco.css';
 
@@ -14,14 +12,14 @@ class Begin extends React.Component {
   render() {
     return (
 
+      <MuiThemeProvider>
+
       <div className="App">
 
         <PageIntro
-          introText="In one minute or less, find out how much you could save by switching to Stateless."
-          introSubText=""
+          introText="Get Advanced Results"
+          introSubText="If you'd like more detailed information on your savings, submit the form below and we'll get in contact soon!"
         />
-
-        <RoundImage img={TCOBg} />
 
         <div className="buttonDiv">
           <Button
@@ -31,7 +29,8 @@ class Begin extends React.Component {
         </div>
 
       </div>
-      
+
+      </MuiThemeProvider>
     );
   }
 }
