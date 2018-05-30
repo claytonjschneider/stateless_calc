@@ -81,7 +81,7 @@ class LoadBalancer extends React.Component {
             min = {min}
             max = {max}
             step = {1}
-            value = {this.props.lbSlider}
+            value = {this.props.lbIndex}
             onChange = {this.props.updatelbSlider}
           />
 
