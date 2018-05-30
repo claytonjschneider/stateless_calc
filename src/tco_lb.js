@@ -41,6 +41,7 @@ class LoadBalancer extends React.Component {
             name="lb_bandwidth"
             style={formStyles.textfield}
             type="number"
+            min="0"
             floatingLabelText="Total Load Balancer Bandwidth Needed per Month (in Gb)"
             hintText="0"
             onChange={this.props.updatelbBandwidth}
@@ -52,6 +53,7 @@ class LoadBalancer extends React.Component {
             name="lb_tenants"
             style={formStyles.textfield}
             type="number"
+            min="0"
             unit="Gigabytes"
             floatingLabelText="Number of Tenants Sharing Load Balancer"
             hintText="0"
@@ -65,6 +67,7 @@ class LoadBalancer extends React.Component {
             name="lb_machines"
             style={formStyles.textfield}
             type="number"
+            min="0"
             floatingLabelText="Total Number of Load-Balancing Machines in Use"
             hintText="0"
             onChange={this.props.updatelbMachines}
