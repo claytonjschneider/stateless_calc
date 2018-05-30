@@ -8,6 +8,7 @@ import Checkbox from 'material-ui/Checkbox';
 // import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 // import Visibility from 'material-ui/svg-icons/action/visibility';
 // import VisibilityOff from 'material-ui/svg-icons/action/visibility-off';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 import FwForm from './tco_fw.js';
 import LbForm from './tco_lb.js';
@@ -50,6 +51,32 @@ class Form extends React.Component {
             onCheck={this.props.lbCheckboxUpdate}
             style={formStyles.checkbox}
           />
+        </div>
+
+        <PageIntro
+          introText="Please select whether you'd like to compare against traditional or virtual network functions."
+          introSubText=""
+        />
+
+        <div style={formStyles.block}>
+          <RadioButtonGroup
+            name="netFuncType"
+            defaultSelected="traditional"
+            onChange={this.props.updateRadioButton}
+          >
+            <RadioButton
+              value="traditional"
+              label="Traditional (Hardware)"
+              style={formStyles.checkbox}
+            />
+            <RadioButton
+              value="virtual"
+              label="Virtual"
+              checked={this.props.lbChecked}
+              onCheck={this.props.lbCheckboxUpdate}
+              style={formStyles.checkbox}
+            />
+          </RadioButtonGroup>
         </div>
 
         {this.props.fwChecked ?

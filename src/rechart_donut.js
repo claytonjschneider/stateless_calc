@@ -20,8 +20,6 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   );
 };
 
-
-
 class DonutChart extends React.Component {
 
   render() {

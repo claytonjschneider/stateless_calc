@@ -37,6 +37,7 @@ class Form extends React.Component {
       showForm: true,
       fwChecked: false,
       lbChecked: false,
+      virtualNF: false,
       fwSlider: 0,
       fwIndex: 0,
       fw_bandwidth: 0,
@@ -66,15 +67,6 @@ class Form extends React.Component {
     });
   }
 
-  // /* Update to Show Form or Results */
-  // updateResults() {
-  //   this.setState((oldState) => {
-  //     return {
-  //       showForm: !oldState.showForm,
-  //     };
-  //   });
-  // }
-
   /* Update to Show User's Choice of NF's */
   updatefwCheck() {
     this.setState((oldState) => {
@@ -87,6 +79,15 @@ class Form extends React.Component {
     this.setState((oldState)  => {
       return {
         lbChecked: !oldState.lbChecked,
+      };
+    });
+  }
+
+  /* Update to Reflect User's Choice of Virtual/Traditional */
+  radioButtonUpdate() {
+    this.setState((oldState)  => {
+      return {
+        virtualNF: !oldState.virtualNF,
       };
     });
   }
@@ -164,11 +165,11 @@ class Form extends React.Component {
       savings = savings + results[i].value;
     }
     this.setState({savings});
-  }
+  };
 
   /* Update Results Array */
   updateResults() {
-    /* Update Bool Val */
+    /* Update Bool Val to Show Form or Results */
     this.setState((oldState) => {
       return {
         showForm: !oldState.showForm,
@@ -181,9 +182,7 @@ class Form extends React.Component {
     /* Backups/Redundancy */
     results[1].value = results[0].value
     /* Power and Cooling */
-    results[2].value =
-      (43200)*(0.1)
-
+    results[2].value = (43200)*(0.1)
     /* Support Tickets */
     results[3].value = 921
     /* Licensing */
@@ -216,9 +215,17 @@ class Form extends React.Component {
       return (
         <div>
           <OpsForm
-            /* Firewall Props */
+            /* Checkbox Props */
             fwCheckboxUpdate={this.updatefwCheck.bind(this)}
             fwChecked={this.state.fwChecked}
+            lbCheckboxUpdate={this.updatelbCheck.bind(this)}
+            lbChecked={this.state.lbChecked}
+
+            /* RadioButton Props */
+            updateRadioButton={this.radioButtonUpdate.bind(this)}
+            virtualNF={this.state.virtualNF}
+
+            /* Firewall Props */
             updatefwSlider={this.handlefwSlider.bind(this)}
             fw_bandwidth={this.state.fw_bandwidth}
             updatefwBandwidth={this.updatefwBandwidth.bind(this)}
@@ -229,9 +236,8 @@ class Form extends React.Component {
             fw_average={this.state.fw_average}
             fwSlider={this.state.fwSlider}
             fwIndex={this.state.fwIndex}
+
             /* Load Balancer Props */
-            lbCheckboxUpdate={this.updatelbCheck.bind(this)}
-            lbChecked={this.state.lbChecked}
             updatelbSlider={this.handlelbSlider.bind(this)}
             lb_bandwidth={this.state.lb_bandwidth}
             updatelbBandwidth={this.updatelbBandwidth.bind(this)}
