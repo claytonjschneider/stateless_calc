@@ -20,33 +20,28 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   );
 };
 
-var savings = 0;
-for (var i = 0; i < data.length; i++) {
-  savings = savings + data[i].value;
-}
+
 
 class DonutChart extends React.Component {
-  render() {
 
-    console.log({savings});
+  render() {
 
     return (
     <div className="chartBox">
       <ResponsiveContainer width="100%" height={350} paddingTop="20px" minHeight={350}>
         <PieChart marginLeft={500}>
-          <Pie data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={90} outerRadius={120} startAngle={90} endAngle={450} fill="#82ca9d" label={renderCustomizedLabel}>
+          <Pie data={this.props.info} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={90} outerRadius={120} startAngle={90} endAngle={450} fill="#82ca9d" label={renderCustomizedLabel}>
             {
               data.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={colors[index]} />
               ))
             }
           </Pie>
-          {/* <Legend width={0} layout="vertical" align="right" verticalAlign="middle" iconSize="16" iconType="circle" wrapperStyle={"position: absolute"} /> */}
           <Tooltip />
         </PieChart>
       </ResponsiveContainer>
       <h2 x={Pie.cx} y={Pie.cy} fill="black" dominantBaseline="central" className="savingsClass">
-        ${savings}
+        ${this.props.savings}
       </h2>
     </div>
     );

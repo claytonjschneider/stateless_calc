@@ -32,6 +32,7 @@ class Form extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      savings: 0,
       beginForm: true,
       showForm: true,
       fwChecked: false,
@@ -48,6 +49,10 @@ class Form extends React.Component {
       lb_average: 0,
       lbSlider: 0,
       lbIndex: 0,
+      t1_fw: 2400,
+      t2_fw: 2700,
+      t3_fw: 5600,
+      t4_fw: 10800,
       usrInfo: {name: '', email: '', company: ''},
     }
   }
@@ -61,14 +66,14 @@ class Form extends React.Component {
     });
   }
 
-  /* Update to Show Form or Results */
-  updateResults() {
-    this.setState((oldState) => {
-      return {
-        showForm: !oldState.showForm,
-      };
-    });
-  }
+  // /* Update to Show Form or Results */
+  // updateResults() {
+  //   this.setState((oldState) => {
+  //     return {
+  //       showForm: !oldState.showForm,
+  //     };
+  //   });
+  // }
 
   /* Update to Show User's Choice of NF's */
   updatefwCheck() {
@@ -152,28 +157,45 @@ class Form extends React.Component {
     this.setState({lbSlider: sliderValues[lbIndex]});
   };
 
-  // /* DO NOT USE AS OF 3.27.18 */
-  // /* Update Results Array */
-  // updateResults() {
-  //   /* Hardware Appliances */
-  //   results[1].value = {
-  //     (this.state.fw_bandwidth/48)*(((0.6*this.state.t1_fw)/0.1)+((0.2*this.state.t2_fw)/1)+((0.1*this.state.t3_fw)/2)+((0.1*this.state.t4_fw)/4))
-  //   }
-  //   /* Backups/Redundancy */
-  //   results[2].value = {results[1].value}
-  //   /* Power and Cooling */
-  //   results[3].value = {
-  //     (43200)*(0.1)
-  //   }
-  //   /* Support Tickets */
-  //   results[4].value = {921}
-  //   /* Licensing */
-  //   results[5].value = {421}
-  //   /* Network Downtime */
-  //   results[6].value = {14000}
-  //   /* Top-Layer Software */
-  //   results[7].value = {0}
-  // };
+  /* Update Total Savings */
+  savingsUpdate() {
+    var savings = 0;
+    for (var i = 0; i < results.length; i++) {
+      savings = savings + results[i].value;
+    }
+    this.setState({savings});
+  }
+
+  /* Update Results Array */
+  updateResults() {
+    /* Update Bool Val */
+    this.setState((oldState) => {
+      return {
+        showForm: !oldState.showForm,
+      };
+    });
+    /* Hardware Appliances */
+    results[0].value =
+      (this.state.fw_bandwidth/48)*(((0.6*this.state.t1_fw)/0.1)+((0.2*this.state.t2_fw)/1)+((0.1*this.state.t3_fw)/2)+((0.1*this.state.t4_fw)/4))
+
+    /* Backups/Redundancy */
+    results[1].value = results[0].value
+    /* Power and Cooling */
+    results[2].value =
+      (43200)*(0.1)
+
+    /* Support Tickets */
+    results[3].value = 921
+    /* Licensing */
+    results[4].value = 421
+    /* Network Downtime */
+    results[5].value = 14000
+    /* Top-Layer Software */
+    results[6].value = 0
+
+    /* Total Savings */
+    this.savingsUpdate();
+  };
 
   showBeginPage() {
     if (this.state.beginForm) {
@@ -233,7 +255,6 @@ class Form extends React.Component {
     }
     else if (!this.state.beginForm && !this.state.showForm) {
       return (
-        /* updateResults(); */
         <div>
           <PageIntro
             introText="Your estimated monthly savings"
@@ -242,6 +263,7 @@ class Form extends React.Component {
 
           <DonutChart
             info={results}
+            savings={this.state.savings}
           />
 
           <div className="buttonDiv">
@@ -259,7 +281,6 @@ class Form extends React.Component {
   }
 
   render() {
-    console.log(this.state);
 
     return (
 
