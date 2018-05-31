@@ -19,6 +19,7 @@
     "react-dom": "^16.2.0",
     "react-google-charts": "^1.5.7",
     "react-googlecharts": "^1.4.0",
+    "react-pretty-numbers": "^3.0.0",
     "react-router": "^4.2.0",
     "react-scripts": "1.1.1",
     "react-tap-event-plugin": "^3.0.2",

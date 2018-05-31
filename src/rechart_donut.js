@@ -2,6 +2,8 @@ import React from 'react';
 
 import { PieChart, ResponsiveContainer, Pie, Legend, Tooltip, Cell } from 'recharts';
 
+import NumericLabel from 'react-pretty-numbers';
+
 import './rechart_donut.css';
 
 const data = [{name: 'Backups', value: 75000}, {name: 'Downtime', value: 40000}, {name: 'Network Engineer Compensation', value: 19000}, {name: 'Power Consumption', value: 12000}, {name: 'Cabling', value: 3000}]
@@ -24,6 +26,28 @@ class DonutChart extends React.Component {
 
   render() {
 
+    var option = {
+      'justification': 'C',
+      'locales': 'en-US',
+      'currency': true,
+      'currencyIndicator': 'USD',
+      'percentage': false,
+      'precision': 2,
+      'wholenumber': null,
+      'commafy': true,
+      'shortFormat': true,
+      'shortFormatMinValue': 100000,
+      'shortFormatPrecision': 1,
+      'title': false,
+      'cssClass': ['red']
+    };
+
+    const formatToolTip = value => (
+      <NumericLabel params={option}>
+        {value}
+      </NumericLabel>
+    );
+
     return (
     <div className="chartBox">
       <ResponsiveContainer width="100%" height={350} paddingTop="20px" minHeight={350}>
@@ -35,11 +59,13 @@ class DonutChart extends React.Component {
               ))
             }
           </Pie>
-          <Tooltip />
+          <Tooltip
+            formatter = {formatToolTip}
+          />
         </PieChart>
       </ResponsiveContainer>
       <h2 x={Pie.cx} y={Pie.cy} fill="black" dominantBaseline="central" className="savingsClass">
-        ${this.props.savings}
+        <NumericLabel params={option}>{this.props.savings}</NumericLabel>
       </h2>
     </div>
     );
