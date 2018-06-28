@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 import PageIntro from './page_intro.js';
 import TextField from 'material-ui/TextField';
@@ -10,7 +9,7 @@ import './tco.css';
 const min = 0;
 const max = 8;
 
-class Firewall extends React.Component {
+class LoadBalancer extends React.Component {
 
   render() {
 
@@ -31,66 +30,68 @@ class Firewall extends React.Component {
       <div className="App">
 
         <PageIntro
-          introText="Firewall Options"
+          introText="Load Balancer Options"
           introSubText=""
         />
 
         <div style={formStyles.block}>
 
           <TextField
-            name="fw_bandwidth"
+            name="lb_bandwidth"
             style={formStyles.textfield}
             type="number"
             min="0"
-            floatingLabelText="Total Firewall Bandwidth Needed per Month (in Gb)"
+            floatingLabelText="Total Load Balancer Bandwidth Needed per Month (in Gb)"
             hintText="0"
-            onChange={this.props.updatefwBandwidth}
-            value={this.props.fw_bandwidth}
+            onChange={this.props.updatelbBandwidth}
+            value={this.props.lb_bandwidth}
             // errorText="This field is required"
           /><br />
 
           <TextField
-            name="fw_tenants"
+            name="lb_tenants"
             style={formStyles.textfield}
             type="number"
             min="0"
-            floatingLabelText="Number of Tenants Sharing Firewall"
+            unit="Gigabytes"
+            floatingLabelText="Number of Tenants"
             hintText="0"
-            value={this.props.fw_tenants}
-            onChange={this.props.updatefwTenants}
+            onChange={this.props.updatelbTenants}
+            value={this.props.lb_tenants}
             // errorText="This field is required"
           /><br />
 
           <TextField
-            name="fw_machines"
+            name="lb_machines"
             style={formStyles.textfield}
             type="number"
             min="0"
-            floatingLabelText="Total Number of Firewall Machines in Use"
+            floatingLabelText="Total Number of Load-Balancing Machines in Use"
             hintText="0"
-            onChange={this.props.updatefwMachines}
-            value={this.props.fw_machines}
+            onChange={this.props.updatelbMachines}
+            value={this.props.lb_machines}
             // errorText="This field is required"
           /><br />
 
           <p>
             <span>{"Desired Average Throughput per Tenant (in Mb/s): "}</span>
-            <span>{this.props.fwSlider}</span>
+            <span>{this.props.lbSlider}</span>
           </p>
           <Slider
-            name = "fw_average"
+            name = "lb_average"
             min = {min}
             max = {max}
             step = {1}
-            value = {this.props.fwIndex}
-            onChange = {this.props.updatefwSlider}
+            value = {this.props.lbIndex}
+            onChange = {this.props.updatelbSlider}
           />
 
         </div>
 
       </div>
+
     );
   }
 }
 
-export default Firewall;
+export default LoadBalancer;

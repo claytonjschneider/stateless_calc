@@ -39,8 +39,11 @@ class DonutChart extends React.Component {
       'shortFormatMinValue': 100000,
       'shortFormatPrecision': 1,
       'title': false,
-      'cssClass': ['red']
     };
+
+    var legendDivStyle = {
+      'position': 'right',
+    }
 
     const formatToolTip = value => (
       <NumericLabel params={option}>
@@ -51,7 +54,7 @@ class DonutChart extends React.Component {
     return (
     <div className="chartBox">
       <ResponsiveContainer width="100%" height={350} paddingTop="20px" minHeight={350}>
-        <PieChart marginLeft={500}>
+        <PieChart>
           <Pie data={this.props.info} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={90} outerRadius={120} startAngle={90} endAngle={450} fill="#82ca9d" label={renderCustomizedLabel}>
             {
               data.map((entry, index) => (
@@ -60,13 +63,27 @@ class DonutChart extends React.Component {
             }
           </Pie>
           <Tooltip
+            className = "toolTip"
             formatter = {formatToolTip}
+            position = {{x: 600, y: 140}}
+          />
+          <Legend
+            height = {0}
+            width = {400}
+            layout = "vertical"
+            align = "center"
+            verticalAlign = "middle"
+            iconType = "circle"
+            iconSize = "10"
+            wrapperStyle = {legendDivStyle}
           />
         </PieChart>
       </ResponsiveContainer>
-      <h2 x={Pie.cx} y={Pie.cy} fill="black" dominantBaseline="central" className="savingsClass">
-        <NumericLabel params={option}>{this.props.savings}</NumericLabel>
-      </h2>
+      <div className="savingsDiv">
+        <h2 x={Pie.cx} y={Pie.cy} fill="black" dominantBaseline="central" className="savingsClass">
+          <NumericLabel params={option}>{this.props.savings}</NumericLabel>
+        </h2>
+      </div>
     </div>
     );
   }

@@ -1,0 +1,37 @@
+.chartBox {
+  position: relative;
+  z-index: 0;
+}
+
+.savingsClass {
+  position: absolute;
+  z-index: 1;
+  margin-right: 0px;
+  margin-left: 0px;
+  align-self: center;
+  top: 118px;
+  color: #32C59F;
+  font-family: 'Roboto', sans-serif;
+  font-size: 32px;
+}
+
+.ResponsiveContainer {
+  z-index: 2;
+  top: 0;
+  left: 0;
+}
+
+.toolTip {
+  z-index: 3 !important;
+  position: absolute;
+}
+
+.savingsDiv {
+  width: 165px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.legendDiv {
+  height: 300px;
+}

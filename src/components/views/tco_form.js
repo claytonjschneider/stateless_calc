@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -7,7 +6,7 @@ import NavBar from './nav_bar.js';
 import PageBanner from './page_banner.js';
 import Button from 'material-ui/RaisedButton';
 import PageIntro from './page_intro.js';
-import HeaderImg from './img/backgrounds/976b04_0f54ebf6146142e2b012a362b98d3ea8-mv2_d_7319_3910_s_4_2.jpg';
+import HeaderImg from './img/backgrounds/newBG.jpg';
 
 import BeginPage from './tco_begin.js';
 import DonutChart from './rechart_donut.js';
@@ -19,10 +18,16 @@ var results = [
   {name: 'Hardware Appliances', value: 0},
   {name: 'Backups/Redundancy', value: 0},
   {name: 'Power and Cooling', value: 0},
-  {name: 'Support Tickets', value: "$"+921},
-  {name: 'Licensing', value: "$"+417},
-  {name: 'Network Downtime', value: "$"+14000},
+  {name: 'Support Tickets', value: 921},
+  {name: 'Licensing', value: 417},
+  {name: 'Network Downtime', value: 14000},
   {name: 'Top-Layer Software', value: 0},
+]
+
+var statelessVars = [
+  {name: 'Hardware Cost', value: 86104},
+  {name: 'Cost per Mb', value: 0.30},
+  {name: 'Cost per Tenant', value: 30},
 ]
 
 const sliderValues = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000]

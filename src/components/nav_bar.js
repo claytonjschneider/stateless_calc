@@ -1,10 +1,11 @@
 import React from 'react';
 
-import logo from './img/logo/Statless-logo-white-and-green.png';
+import logo from './img/logo/Statless-logo-black-and-green.png';
 
 import './nav_bar.css';
 
 class NavBar extends React.Component {
+
   render() {
     return (
 

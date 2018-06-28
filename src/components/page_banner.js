@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Line from './line.js';
-
 import './page_banner.css';
 
 class PageBanner extends React.Component {
@@ -17,7 +15,6 @@ class PageBanner extends React.Component {
 
           <h2>
             {this.props.bannerText}
-            <Line color="white" />
           </h2>
 
       </div>
