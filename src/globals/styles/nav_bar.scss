@@ -1,0 +1,15 @@
+.navBar {
+  background-color: #FFFFFF;
+  height: 100px;
+  color: white;
+  box-shadow: 0 0 12px rgba(0,0,0,0.2);
+  position: relative;
+  z-index: 1;
+}
+
+.navBar_Logo {
+  height: 35px;
+  align-self: center;
+  padding-top: 5px;
+  padding-left: 10px;
+}
