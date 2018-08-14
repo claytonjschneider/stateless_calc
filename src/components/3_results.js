@@ -11,7 +11,10 @@ import Button from '@material-ui/core/Button'
 
 import PageIntro from '../globals/components/page_intro'
 
-import PieChart from './_piechart.js'
+import { hwResults } from './_createTraditionalResults'
+{/*
+import { nfvResults } from './_createNFVResults'
+*/}
 import Echart from './_echarts.js'
 
 const styles = {
@@ -59,6 +62,9 @@ class Results extends React.Component {
   };
 
   render ()  {
+
+    console.log("Props in results comp", this.props);
+
     const { classes } = this.props;
     const { expanded } = this.state;
 
@@ -67,13 +73,13 @@ class Results extends React.Component {
         <PageIntro introText="Your Monthly Savings" introSubText="" />
         <Echart
           title="results"
-          data={[
-            ["Category", "Amount"],
-            ["Backups", 75000],
-            ["Downtime", 40000],
-            ["Network Engineer Compensation", 19000],
-            ["Power Consumption", 12000],
-            ["Cabling", 3000],
+          data = {[
+            {name: "Hardware Appliances", value: 0, desc: "Traditional network functions require you to purchase specialized hardware, with significant limitations to performance, scalability, and uptime. We calculate this expense with an average hardware lifetime of 4 years."},
+            {name: "Backups/Redundancy", value: 0, desc: "With traditional NFs, downtime prevention requires hot failover backups. We're calculating with 2N redundancy, though some environments might need even more."},
+            {name: "Power and Resources", value: 0, desc: "Because Stateless NFs require so much less hardware, the savings in power, cooling, and other resource consumption really adds up. We're calculating this based on average wattage use of each tenant."},
+            {name: "Licensing", value: 0, desc: "Other vendors require you to make large recurring license purchases in order to run their software on top of the hardware you already purchased. Average cost of license * number of NFs needed."},
+            {name: "Network Downtime", value: 14000, desc: "Downtime is one of the costliest events in any network... By switching to Stateless for your network functions, you could save thousands every month, depending on the size of your data center."},
+            {name: "Other", value: 921, desc: "On top of all this, there are still other ways Stateless can save you money. Fewer cables throughout your network, fewer support tickets, etc. Continue to the next page to get your advanced results from us."}
           ]}
         />
         <div className={classes.root}>

@@ -1,10 +1,12 @@
-export default (state = {}, action) => {
+import { SUBMIT_FORM } from "../actions/submitForm"
+
+export default (state = {data: {}}, action) => {
   switch (action.type) {
-    case 'SUBMIT_FORM':
+    case SUBMIT_FORM:
+      console.log("Submit_form case!");
       return {
-        result: action.payload
-      }
-    default:
-      return state
+        ...state, data: action.payload
+      };
   }
+  return(state);
 }

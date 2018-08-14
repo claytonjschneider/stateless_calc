@@ -84,36 +84,12 @@ const sliderValues = [
 class Form extends React.Component {
 
   state = {
-    NFtype: "traditional",
+    NFtype: null,
     firewall: false,
     loadBalancer: false,
     router: false,
     value: 0,
-    firewallVendor: 0,
-    ciscoFirewall: {
-      t1: 1,
-      t2: 2,
-      t3: 3,
-      t4: 4,
-    },
-    juniperFirewall: {
-      t1: 5,
-      t2: 6,
-      t3: 7,
-      t4: 8,
-    },
-    paloAltoFirewall: {
-      t1: 9,
-      t2: 10,
-      t3: 11,
-      t4: 12,
-    },
-    fortinetFirewall: {
-      t1: 13,
-      t2: 14,
-      t3: 15,
-      t4: 16,
-    },
+    Vendor: null,
     tenantNumber: 0,
     tenantIndex: 0,
     tenantThroughput: 0,
@@ -141,6 +117,21 @@ class Form extends React.Component {
     this.setState({ tenantIndex });
     this.setState({tenantThroughput: sliderValues[tenantIndex]});
   };
+
+  onFormSubmission = () => {
+    const dataToPass = {
+      firewall: this.state.firewall,
+      loadBalancer: this.state.loadBalancer,
+      router: this.state.router,
+      tenantNumber: this.state.tenantNumber,
+      tenantThroughput: this.state.tenantThroughput,
+      Vendor: this.state.Vendor
+    }
+    
+    console.log("FormSubmission fcn invoked");
+    this.props.changePage();
+    this.props.submitForm(dataToPass);
+  }
 
   render() {
     const { classes } = this.props;
@@ -212,18 +203,18 @@ class Form extends React.Component {
         <PageIntro introText="Select Vendor to Compare" introSubText="" />
         <FormControl required className={classes.formControl}>
           <Select
-            value={this.state.firewallVendor}
+            value={this.state.Vendor}
             onChange={this.handleVendor}
-            name="firewallVendor"
+            name="Vendor"
             inputProps={{
               id: 'vendor-required',
             }}
             className={classes.select}
           >
-            <MenuItem value={this.state.ciscoFirewall}>Cisco</MenuItem>
-            <MenuItem value={this.state.juniperFirewall}>Juniper</MenuItem>
-            <MenuItem value={this.state.paloAltoFirewall}>Palo Alto</MenuItem>
-            <MenuItem value={this.state.fortinetFirewall}>Fortinet</MenuItem>
+            <MenuItem value={0}>Cisco</MenuItem>
+            <MenuItem value="juniper">Juniper</MenuItem>
+            <MenuItem value="paloAlto">Palo Alto</MenuItem>
+            <MenuItem value="fortinet">Fortinet</MenuItem>
           </Select>
           <FormHelperText>Required</FormHelperText>
         </FormControl>
@@ -247,7 +238,7 @@ class Form extends React.Component {
         <Slider className={classes.slider} value={this.state.tenantIndex} min={0} max={8} step={1} onChange={this.handleSlider} />
 
         <div className="buttonDiv">
-          <Button variant="contained" style={styles.button} onClick={() => this.props.changePage()}>
+          <Button variant="contained" style={styles.button} onClick={this.onFormSubmission.bind(this)}>
             Results
           </Button>
         </div>

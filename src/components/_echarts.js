@@ -1,14 +1,6 @@
 import React from 'react'
 import ReactEcharts from 'echarts-for-react'
 
-const data = [
-  {name: 'Backups', value: 75000},
-  {name: 'Downtime', value: 40000},
-  {name: 'Network Engineer Compensation', value: 19000},
-  {name: 'Power Consumption', value: 12000},
-  {name: 'Cabling', value: 3000},
-];
-
 const Echart = props => {
   const getOptions = () => {
     return {
@@ -31,7 +23,7 @@ const Echart = props => {
         orient: 'vertical',
         x: 'right',
         y: 'top',
-        data: ["Backups", "Downtime", "Network Engineer Compensation", "Power Consumption", "Cabling"]
+        data: ["Hardware Appliances", "Backups", "Downtime", "Network Engineer Compensation", "Resource Consumption", "Others"]
       },
       series: [
         {
@@ -57,7 +49,7 @@ const Echart = props => {
               show: true,
             }
           },
-          data: data
+          data: props.data
         }
       ]
     };

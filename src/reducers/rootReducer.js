@@ -1,6 +1,7 @@
 import {combineReducers } from 'redux';
-import SubmitForm from './submitForm';
+
+import submitForm from './submitForm';
 
 export default combineReducers({
-  SubmitForm
+  submitForm
 });
