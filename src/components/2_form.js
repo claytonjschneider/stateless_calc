@@ -127,7 +127,7 @@ class Form extends React.Component {
       tenantThroughput: this.state.tenantThroughput,
       Vendor: this.state.Vendor
     }
-    
+
     console.log("FormSubmission fcn invoked");
     this.props.changePage();
     this.props.submitForm(dataToPass);
@@ -236,6 +236,9 @@ class Form extends React.Component {
           }}
         />
         <Slider className={classes.slider} value={this.state.tenantIndex} min={0} max={8} step={1} onChange={this.handleSlider} />
+        <p>
+          Desired Average Throughput per Tenant (in Mb/s): {this.state.tenantThroughput}
+        </p>
 
         <div className="buttonDiv">
           <Button variant="contained" style={styles.button} onClick={this.onFormSubmission.bind(this)}>

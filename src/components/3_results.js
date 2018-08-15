@@ -12,9 +12,8 @@ import Button from '@material-ui/core/Button'
 import PageIntro from '../globals/components/page_intro'
 
 import { hwResults } from './_createTraditionalResults'
-{/*
 import { nfvResults } from './_createNFVResults'
-*/}
+
 import Echart from './_echarts.js'
 
 const styles = {
