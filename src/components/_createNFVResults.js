@@ -1,4 +1,4 @@
-{/*
+/*
   V1 = Cisco
   V2 = Juniper
   V3 = Palo Alto
@@ -8,7 +8,7 @@
   T2 = 1 Gbps
   T3 = 2 Gbps
   T4 = 4 Gbps
-*/}
+*/
 
 const fwPrices = [
   [
@@ -91,8 +91,8 @@ const rPrices = [
   ]
 ];
 
-export const nfvResults = (firewall, loadBalancer, router, tenantNumber, tenantThroughput, Vendor, ) => {
-  const data = [
+export const nfvResults = (firewall, loadBalancer, router, tenantNumber, tenantThroughput, Vendor) => {
+  var data = [
     {name: "Hardware", value: 0, desc: "Traditional network functions require you to purchase specialized hardware, with significant limitations to performance, scalability, and uptime. We calculate this expense with an average hardware lifetime of 4 years."},
     {name: "Power and Resources", value: 0, desc: "Because Stateless NFs require so much less hardware, the savings in power, cooling, and other resource consumption really adds up. We're calculating this based on average wattage use of each tenant."},
     {name: "Licensing", value: 0, desc: "Other vendors require you to make large recurring license purchases in order to run their software on top of the hardware you already purchased. Average cost of license * number of NFs needed."},
@@ -101,52 +101,57 @@ export const nfvResults = (firewall, loadBalancer, router, tenantNumber, tenantT
   ];
 
   /* Set Bandwidth */
-  var bw = (this.props.tenantNumber * this.props.tenantThroughput);
+  var bw = (tenantNumber * tenantThroughput);
 
   /* 1. Hardware */
     /* Firewall */
-    if(this.props.firewall) {
-      this.data[0].value +=
-        (this.bw/48)*
-        ((6*fwPrices[this.props.Vendor][0])
-        +(0.2*fwPrices[this.props.Vendor][1])
-        +(0.05*fwPrices[this.props.Vendor][2])
-        +(0.025*fwPrices[this.props.Vendor][3]));
+    if(firewall) {
+      data[0].value = data[0].value +
+        ((bw / 48000)*(
+          (6*fwPrices[Vendor][0]) +
+          (0.2*fwPrices[Vendor][1]) +
+          (0.05*fwPrices[Vendor][2]) +
+          (0.025*fwPrices[Vendor][3])
+        ));
     }
 
     /* Load Balancer */
-    if(this.props.loadBalancer) {
-      this.data[0].value +=
-      ((this.bw / 48)*(
-        (6*lbPrices[this.props.Vendor][0]) +
-        (0.2*lbPrices[this.props.Vendor][1]) +
-        (0.05*lbPrices[this.props.Vendor][2]) +
-        (0.025*lbPrices[this.props.Vendor][3])
+    if(loadBalancer) {
+      data[0].value = data[0].value +
+      ((bw / 48000)*(
+        (6*lbPrices[Vendor][0]) +
+        (0.2*lbPrices[Vendor][1]) +
+        (0.05*lbPrices[Vendor][2]) +
+        (0.025*lbPrices[Vendor][3])
       ));
     }
 
     /* Router */
-    if(this.props.router) {
-      this.data[0].value +=
-      ((this.bw / 48)*(
-        (6*rPrices[this.props.Vendor][0]) +
-        (0.2*rPrices[this.props.Vendor][1]) +
-        (0.05*rPrices[this.props.Vendor][2]) +
-        (0.025*rPrices[this.props.Vendor][3])
+    if(router) {
+      data[0].value = data[0].value +
+      ((bw / 48000)*(
+        (6*rPrices[Vendor][0]) +
+        (0.2*rPrices[Vendor][1]) +
+        (0.05*rPrices[Vendor][2]) +
+        (0.025*rPrices[Vendor][3])
       ));
     }
 
   /* 2. Power and Resources */
-  this.data[1].value = (43200)*(0.001)*(this.props.tenantNumber)*(this.props.firewall + this.props.loadBalancer + this.props.router);
+  data[1].value = (43200)*(0.001)*(tenantNumber)*(firewall + loadBalancer + router);
 
   /* 3. Licensing */
-  this.data[2].value = 421*(this.props.firewall + this.props.loadBalancer + this.props.router);
+  data[2].value = 421*(firewall + loadBalancer + router);
 
   /* 4. Network Downtime */
-  this.data[3].value = 140*(this.props.tenantNumber);
+  data[3].value = 140*(tenantNumber);
 
   /* 5. Others */
-  this.data[4].value = 300*(this.props.firewall + this.props.loadBalancer + this.props.router);
+  data[4].value = 300*(firewall + loadBalancer + router);
 
-  return (this.data);
+  for(var key in data) {
+    data[key].value = Math.floor(data[key].value);
+  }
+
+  return (data);
 };

@@ -60,7 +60,16 @@ class Results extends React.Component {
     });
   };
 
+  chartData = [];
+
   render ()  {
+
+    if(this.props.data.NFtype === "traditional") {
+      this.chartData = hwResults(this.props.data.firewall, this.props.data.loadBalancer, this.props.data.router, this.props.data.tenantNumber, this.props.data.tenantThroughput, this.props.data.Vendor);
+    }
+    else if(this.props.data.NFtype === "nfv") {
+      this.chartData = nfvResults(this.props.data.firewall, this.props.data.loadBalancer, this.props.data.router, this.props.data.tenantNumber, this.props.data.tenantThroughput, this.props.data.Vendor);
+    }
 
     console.log("Props in results comp", this.props);
 
@@ -72,14 +81,15 @@ class Results extends React.Component {
         <PageIntro introText="Your Monthly Savings" introSubText="" />
         <Echart
           title="results"
-          data = {[
+          /*data = {[
             {name: "Hardware Appliances", value: 0, desc: "Traditional network functions require you to purchase specialized hardware, with significant limitations to performance, scalability, and uptime. We calculate this expense with an average hardware lifetime of 4 years."},
             {name: "Backups/Redundancy", value: 0, desc: "With traditional NFs, downtime prevention requires hot failover backups. We're calculating with 2N redundancy, though some environments might need even more."},
             {name: "Power and Resources", value: 0, desc: "Because Stateless NFs require so much less hardware, the savings in power, cooling, and other resource consumption really adds up. We're calculating this based on average wattage use of each tenant."},
             {name: "Licensing", value: 0, desc: "Other vendors require you to make large recurring license purchases in order to run their software on top of the hardware you already purchased. Average cost of license * number of NFs needed."},
             {name: "Network Downtime", value: 14000, desc: "Downtime is one of the costliest events in any network... By switching to Stateless for your network functions, you could save thousands every month, depending on the size of your data center."},
             {name: "Other", value: 921, desc: "On top of all this, there are still other ways Stateless can save you money. Fewer cables throughout your network, fewer support tickets, etc. Continue to the next page to get your advanced results from us."}
-          ]}
+          ]}*/
+          data={this.chartData}
         />
         <div className={classes.root}>
           <ExpansionPanel className={classes.expand} expanded={expanded === 'panel1'} onChange={this.handleExpand('panel1')}>

@@ -23,7 +23,7 @@ const Echart = props => {
         orient: 'vertical',
         x: 'right',
         y: 'top',
-        data: ["Hardware Appliances", "Backups", "Downtime", "Network Engineer Compensation", "Resource Consumption", "Others"]
+        data: props.data
       },
       series: [
         {

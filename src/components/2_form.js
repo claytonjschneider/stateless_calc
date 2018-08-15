@@ -120,6 +120,7 @@ class Form extends React.Component {
 
   onFormSubmission = () => {
     const dataToPass = {
+      NFtype: this.state.NFtype,
       firewall: this.state.firewall,
       loadBalancer: this.state.loadBalancer,
       router: this.state.router,
@@ -128,7 +129,6 @@ class Form extends React.Component {
       Vendor: this.state.Vendor
     }
 
-    console.log("FormSubmission fcn invoked");
     this.props.changePage();
     this.props.submitForm(dataToPass);
   }
