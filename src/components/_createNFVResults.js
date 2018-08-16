@@ -92,9 +92,9 @@ const rPrices = [
 ];
 
 export const nfvResults = (firewall, loadBalancer, router, tenantNumber, tenantThroughput, Vendor) => {
-  var data = [
-    {name: "Hardware", value: 0, desc: "Traditional network functions require you to purchase specialized hardware, with significant limitations to performance, scalability, and uptime. We calculate this expense with an average hardware lifetime of 4 years."},
-    {name: "Power and Resources", value: 0, desc: "Because Stateless NFs require so much less hardware, the savings in power, cooling, and other resource consumption really adds up. We're calculating this based on average wattage use of each tenant."},
+  let data = [
+    {name: "Hardware", value: 0, desc: "A major shortcoming of NFV is that it doesn't address the root problem behind step-function scaling. Every time you run out of provisioned space on your VM, you'll need to either add or upgrade more devices. The larger your network, the more you're affected."},
+    {name: "Power and Resources", value: 0, desc: "Because Stateless NFs require so much less hardware, the savings in power, cooling, and other resource consumption really add up. We're calculating this based on average wattage use of each tenant."},
     {name: "Licensing", value: 0, desc: "Other vendors require you to make large recurring license purchases in order to run their software on top of the hardware you already purchased. Average cost of license * number of NFs needed."},
     {name: "Network Downtime", value: 14000, desc: "Downtime is one of the costliest events in any network... By switching to Stateless for your network functions, you could save thousands every month, depending on the size of your data center."},
     {name: "Other", value: 921, desc: "On top of all this, there are still other ways Stateless can save you money. Fewer cables throughout your network, fewer support tickets, etc. Continue to the next page to get your advanced results from us."}

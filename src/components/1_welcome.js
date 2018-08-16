@@ -17,6 +17,8 @@ const styles = {
 class Welcome extends React.Component {
   render () {
 
+    const { classes } = this.props;
+
     return (
       <div className="App">
         <PageIntro introText="Find out how much you could save with Stateless Akros." introSubText="" />

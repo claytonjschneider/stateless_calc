@@ -92,10 +92,10 @@ const rPrices = [
 ];
 
 export const hwResults = (firewall, loadBalancer, router, tenantNumber, tenantThroughput, Vendor) => {
-  var data = [
-    {name: "Hardware Appliances", value: 0, desc: "Traditional network functions require you to purchase specialized hardware, with significant limitations to performance, scalability, and uptime. We calculate this expense with an average hardware lifetime of 4 years."},
+  let data = [
+    {name: "Hardware Appliances", value: 0, desc: "Traditional network functions require you to purchase specialized hardware, with significant limitations to performance, scalability, and uptime. The bigger your network, the more you're affected. We calculate this expense with an average hardware lifetime of 4 years."},
     {name: "Backups/Redundancy", value: 0, desc: "With traditional NFs, downtime prevention requires hot failover backups. We're calculating with 2N redundancy, though some environments might need even more."},
-    {name: "Power and Resources", value: 0, desc: "Because Stateless NFs require so much less hardware, the savings in power, cooling, and other resource consumption really adds up. We're calculating this based on average wattage use of each tenant."},
+    {name: "Power and Resources", value: 0, desc: "Because Stateless NFs require so much less hardware, the savings in power, cooling, and other resource consumption really add up. We're calculating this based on average wattage use of each tenant."},
     {name: "Licensing", value: 0, desc: "Other vendors require you to make large recurring license purchases in order to run their software on top of the hardware you already purchased. Average cost of license * number of NFs needed."},
     {name: "Network Downtime", value: 14000, desc: "Downtime is one of the costliest events in any network... By switching to Stateless for your network functions, you could save thousands every month, depending on the size of your data center."},
     {name: "Other", value: 921, desc: "On top of all this, there are still other ways Stateless can save you money. Fewer cables throughout your network, fewer support tickets, etc. Continue to the next page to get your advanced results from us."}

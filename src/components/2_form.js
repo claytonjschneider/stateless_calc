@@ -119,7 +119,7 @@ class Form extends React.Component {
   };
 
   onFormSubmission = () => {
-    const dataToPass = {
+    var dataToPass = {
       NFtype: this.state.NFtype,
       firewall: this.state.firewall,
       loadBalancer: this.state.loadBalancer,
@@ -129,19 +129,28 @@ class Form extends React.Component {
       Vendor: this.state.Vendor
     }
 
-    this.props.changePage();
-    this.props.submitForm(dataToPass);
+    if(
+      (dataToPass.NFtype !== null)
+      && ((dataToPass.firewall + dataToPass.loadBalancer + dataToPass.router) >= 1)
+      && (dataToPass.tenantNumber >= 1)
+      && (dataToPass.tenantThroughput !== 0)
+      && (dataToPass.Vendor !== null)
+    ) {
+        this.props.changePage();
+        this.props.submitForm(dataToPass);
+      }
   }
 
   render() {
     const { classes } = this.props;
+    const error = Object.values(this.state).filter(v => v).length !== 1;
 
     return (
 
       <div className="App">
-        <FormControl component="fieldset" className={classes.root}>
+        <FormControl required error={error} component="fieldset" className={classes.root}>
           {/* Select Class of NF */}
-          <PageIntro introText="Compare to Traditional or Virtual?" introSubText="" />
+          <PageIntro introText="Compare to Traditional or Virtual Network Functions?" introSubText="" />
           <RadioGroup
             className={classes.buttonGroup}
             name="NFtype"
@@ -212,9 +221,9 @@ class Form extends React.Component {
             className={classes.select}
           >
             <MenuItem value={0}>Cisco</MenuItem>
-            <MenuItem value="juniper">Juniper</MenuItem>
-            <MenuItem value="paloAlto">Palo Alto</MenuItem>
-            <MenuItem value="fortinet">Fortinet</MenuItem>
+            <MenuItem value={1}>Juniper</MenuItem>
+            <MenuItem value={2}>Palo Alto</MenuItem>
+            <MenuItem value={3}>Fortinet</MenuItem>
           </Select>
           <FormHelperText>Required</FormHelperText>
         </FormControl>

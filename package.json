@@ -2,6 +2,7 @@
   "name": "tco-new",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://tco.bestateless.com",
   "dependencies": {
     "@material-ui/core": "^1.4.2",
     "@material-ui/icons": "^2.0.1",
@@ -28,7 +29,7 @@
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
-    "build-js": "react-scripts-build",
+    "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js"
   }
 }

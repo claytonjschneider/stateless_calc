@@ -5,15 +5,18 @@ const Echart = props => {
   const getOptions = () => {
     return {
       title: {
+        show: false,
         text: props.title,
         textStyle: {
           fontFamily: "Open Sans",
-          color: "#FFFFFF"
+          fontSize: '30px',
+          fontWeight: 'bold',
+          left: 'auto',
+          top: 'auto',
+          right: 'auto',
+          bottom: 'auto',
+          color: "#32C59F"
         },
-        label: {
-          show: true,
-          position: 'center'
-        }
       },
       tooltip: {
         trigger: 'item',
@@ -27,27 +30,18 @@ const Echart = props => {
       },
       series: [
         {
-          name: 'NameInSeries',
+          name: props.savingsSum,
           type: 'pie',
-          radius: ['50%', '70%'],
+          radius: ['40%', '60%'],
           avoidLabelOverlap: false,
           label: {
-            normal: {
-              show: false,
-              position: 'center'
-            },
-            emphasis: {
-              show: false,
-              textStyle: {
-                fontSize: '30px',
-                fontWeight: 'bold',
-              }
-            }
-          },
-          labelLine: {
-            normal: {
-              show: true,
-            }
+            show: true,
+            position: 'center',
+            formatter: "${a}",
+            color: "#32C59F",
+            fontWeight: "bold",
+            fontFamily: "Open Sans",
+            fontSize: "30"
           },
           data: props.data
         }
@@ -56,7 +50,7 @@ const Echart = props => {
   };
   return <ReactEcharts
             option={getOptions()}
-            style={{height: '600px', width: '60%', marginLeft: 'auto', marginRight: 'auto'}}
+            style={{height: '600px', width: '40%', marginLeft: 'auto', marginRight: 'auto'}}
             className='echarts-for-react'
             notMerge={true}
             lazyUpdate={false}
